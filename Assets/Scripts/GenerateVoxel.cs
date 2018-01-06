@@ -5,34 +5,36 @@ using System.Text;
 
 public class GenerateVoxel : MonoBehaviour {
 
-    List<VoxData> vds;
+    MainData MD;
     private void Awake()
     {
-        var bytes = Resources.Load<TextAsset>("chr_rain").bytes;
-        string json = Encoding.UTF8.GetString(bytes);
-        var md = JsonUtil.JsonHelper.ToObject<List<VoxData>>(json);
+        var text = Resources.Load<TextAsset>("menger").text;
+        MD = LitJson.JsonMapper.ToObject<MainData>(text);
         //var data = Resources.Load()
     }
     // Use this for initialization
     void Start ()
     {
-	    //for(int i =0; i < vds.Count;i++)
-     //   {
-     //       PrimitiveType.
-     //   }
-	}
+        var voxDatas = MD.voxDatas;
+        for(int i =0; i < voxDatas.Count;i++)
+        {
+            var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            obj.transform.position = new Vector3(voxDatas[i].x, voxDatas[i].y, voxDatas[i].z);
+        }
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
 }
-[System.Serializable]
+
 public class MainData
 {
-    public VoxData[] vds;
+    public List<VoxData> voxDatas;
 }
-[System.Serializable]
+
 public class VoxData
 {
     public int x;
