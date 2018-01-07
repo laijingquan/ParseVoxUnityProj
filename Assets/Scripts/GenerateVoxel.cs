@@ -18,8 +18,9 @@ public class GenerateVoxel : MonoBehaviour {
         
         var voxDatas = MD.voxDatas;
         var rgbas = MD.rgbas;
-        var root = new GameObject();
-        for(int i =0; i < voxDatas.Count;i++)
+        //var root = new GameObject();
+        var root = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        for (int i =0; i < voxDatas.Count;i++)
         {
             var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
             obj.transform.position = new Vector3(voxDatas[i].x, voxDatas[i].y, voxDatas[i].z);
